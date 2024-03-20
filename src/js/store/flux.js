@@ -74,6 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			updateContact: async (contact) => {
+				const actions= getActions()
 				try {
 					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact.id}`, {
 						method: "PUT",
@@ -89,7 +90,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const updatedContacts = [...getStore().contacts];
 						updatedContacts[updatedContactIndex] = data;
 						setStore({ contacts: updatedContacts });
-						alert("Contacto actualizado exitosamente refresca la app");
+						actions.GetContact();
+						alert("Contacto actualizado exitosamente");
 					} else {
 						alert("Error al actualizar contacto");
 					}
@@ -100,8 +102,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			
 			createContact: async (contact) => {
+				console.log(contact)
+				const actions= getActions()
 				try {
-					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact`, {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
@@ -110,14 +114,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			
 					if (response.ok) {
-						const data = await response.json();
-						actions.GetContact(); // Actualizar contactos después de la creación.
+						actions.GetContact(); 
 						alert("Contacto creado exitosamente");
 					} else {
 						alert("Error al crear contacto");
 					}
 				} catch (error) {
-					console.log("Error:", error);
 					alert("Error al crear contacto");
 				}
 			},

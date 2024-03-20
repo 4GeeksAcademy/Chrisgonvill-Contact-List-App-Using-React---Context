@@ -9,7 +9,8 @@ export const Navbar = () => {
         full_name: "",
         email: "",
         address: "",
-        phone: ""
+        phone: "",
+        agenda_slug: "christian_slug"
     });
 
     const handleInputChange = e => {
@@ -25,7 +26,8 @@ export const Navbar = () => {
             full_name: "",
             email: "",
             address: "",
-            phone: ""
+            phone: "",
+            agenda_slug: "christian_slug"
         });
     };
 
